@@ -62,6 +62,7 @@ Thumbs.db:encryptable
 ehthumbs.db
 ehthumbs_vista.db
 .vscode/tasks.json
+.vscode
 
 # Dump file
 *.stackdump
