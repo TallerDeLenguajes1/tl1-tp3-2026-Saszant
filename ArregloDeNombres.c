@@ -4,12 +4,14 @@
 #include <string.h>
 
 void mostrarPersonas(char *vector[], int cantidad);
+int BuscarNombre(char *vector[], char *clave, int cantidad);
 
 int main(){
 
     char *buff;
-    char *nombre;
     char *vector[5];
+    char *clave;
+    int posicion;
 
     buff= (char *) malloc(100*sizeof(char));
     for(int i = 0; i < 5; i++){
@@ -22,9 +24,23 @@ int main(){
 
     mostrarPersonas(vector, 5);
 
+    printf("Ingrese la clave a buscar :");
+    gets(buff);
+    clave = (char *) malloc((strlen(buff) + 1) * sizeof(char));
+    strcpy(clave, buff);
+
+    posicion = BuscarNombre(vector, clave, 5);
+
+    if (posicion != -1) {
+        printf("Nombre encontrado: %s\n", vector[posicion]);
+    } else {
+        printf("no se encontró el valor buscado\n");
+    }
+
     for(int i = 0; i < 5; i++){
         free(vector[i]);
     }
+    free(clave);
     free(buff);
 
     return 0;
@@ -36,4 +52,13 @@ void mostrarPersonas(char *vector[], int cantidad){
         printf("[%d]%s\n", i+1,vector[i]);
     }
      
+}
+
+int BuscarNombre(char *vector[], char *clave, int cantidad) {
+    for (int i = 0; i < cantidad; i++) {
+        if (strstr(vector[i], clave) != NULL) {
+            return i; 
+        }
+    }
+    return -1; 
 }
